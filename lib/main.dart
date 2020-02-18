@@ -28,10 +28,12 @@ class _MyAppState extends State<MyApp> {
           backgroundColor: Colors.blue[700],
         ),
         body: GoogleMap(
+          myLocationEnabled: true,
+          mapType: MapType.normal,
           onMapCreated: _onMapCreated,
           initialCameraPosition: CameraPosition(
             target: _center,
-            zoom: 11.0,
+            zoom: 15.0,
           ),
         ),
       ),
