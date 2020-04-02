@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:user_location/user_location.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -19,6 +20,38 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Hydro Mapper'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text('Map Water Station Markers under progress, Coming Soon'),
+            RaisedButton(
+              textColor: Colors.white,
+              color: Colors.blue,
+              child: Text('Go to view map'),
+              onPressed: () {
+                navigateToSubPage(context);
+              },
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+Future navigateToSubPage(context) async {
+  Navigator.push(context, MaterialPageRoute(builder: (context) => MapPage()));
+}
+
+
+class MapPage extends StatelessWidget {
   // ADD THIS
   MapController mapController = MapController();
   UserLocationOptions userLocationOptions;
@@ -35,11 +68,11 @@ class HomePage extends StatelessWidget {
       updateMapLocationOnPositionChange: false,
     );
     return Scaffold(
-        appBar: AppBar(title: Text("Hydro Mapper")),
+        appBar: AppBar(title: Text("Hydro Mapper - Map")),
         body: FlutterMap(
           options: MapOptions(
             center: LatLng(34.057459, -117.822361),
-            zoom: 20.0,
+            zoom: 15.0,
             plugins: [
               // ADD THIS
               UserLocationPlugin(),
@@ -60,3 +93,12 @@ class HomePage extends StatelessWidget {
         ));
   }
 }
+
+Marker firstMark= new Marker(
+  width: 45.0,
+  height: 45.0,
+  point: new LatLng(34.057459, -117.822361),
+  builder: (context) => new Container(
+    child: IconButton(icon: Icon(Icons.location_on), onPressed: null),
+  )
+);
